@@ -12,51 +12,41 @@ import com.linusapps.collectionvisualizer.model.CustomLinkedList;
  */
 public class CollectionVisualizerController<E> {
 	
-	private static CustomArrayList<Integer> arrayListTest;
-	private static CustomLinkedList<Integer> linkedListTest;
+	/**
+	 * This holds 
+	 */
+	private static CustomArrayList<Integer> theArrayList;
+	private static CustomLinkedList<Integer> theLinkedList;
 	
 	public CollectionVisualizerController(){
-		arrayListTest = new CustomArrayList<Integer>();
-		linkedListTest = new CustomLinkedList<Integer>();
+		theArrayList = new CustomArrayList<Integer>();
+		theLinkedList = new CustomLinkedList<Integer>();
 	
 	}
 	
+	/**
+	 * Initialize the lists with a various size.
+	 * @param size
+	 */
 	public static void initializeLists(int size){
-		assert size > 0 || size < Integer.MAX_VALUE : "TOO BIG";
-		
 		for(int i = 0; i < size; ++i){
-			arrayListTest.add(i);
-			linkedListTest.add(i);
+			theArrayList.add(i);
+			theLinkedList.add(i);
 		}
-	
+		
+
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/**
+	 * Main method. To remove later!
+	 * @param args
+	 */
 	public static void main(String... args){
 		CollectionVisualizerController c = new CollectionVisualizerController();
-		c.initializeLists(100);
-		
-		System.out.println("Contains for value: 23");
-		System.out.println("ArrayList: " + arrayListTest.checkContains(23) + " ms");
-		System.out.println("LinkedList: " +  linkedListTest.checkContains(23) + " ms");
-		
-		System.out.println("Add value: 101");
-		System.out.println("ArrayList: " + arrayListTest.addItem(101) + " ms");
-		System.out.println("LinkedList: " +  linkedListTest.addItem(101) + " ms");
-		
-		System.out.println("Remove value: 57");
-		System.out.println("ArrayList: " + arrayListTest.removeItem(57) + " ms");
-		System.out.println("LinkedList: " +  linkedListTest.removeItem(57) + " ms");
+		c.initializeLists(21);
+		theArrayList.draw();
+		theLinkedList.draw();
 
-		
 		
 	}
 

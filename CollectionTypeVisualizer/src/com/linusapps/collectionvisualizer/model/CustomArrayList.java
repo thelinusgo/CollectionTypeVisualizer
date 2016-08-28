@@ -1,6 +1,7 @@
 package com.linusapps.collectionvisualizer.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 /**
  * An Extension of a  ArrayList, but has methods that return the elapsed time for certain operations.
  * The method returns the elapsed time taken to perform the operation, but if it was not successful, it returns -1.
@@ -10,15 +11,31 @@ import java.util.ArrayList;
  */
 public class CustomArrayList<E> extends ArrayList<E>{
 	
-	
-	
-	
+	/*Various constructors for the ArrayList...*/
 	
 	public CustomArrayList() {
 		super();
 	}
-
 	
+	public CustomArrayList(int initialCapacity){
+		super(initialCapacity);
+	}
+	
+	public CustomArrayList(Collection <? extends E> c){
+		super(c);
+	}
+	
+	/**
+	 * Permits drawing the list in a textual form.
+	 */
+	public void draw(){
+		int size = super.size();
+		System.out.println("\nArrayList: " + "contains " + (super.size()-1) + (super.size() > 1 ? " values" : " value"));
+		for(int i = 1; i < size; ++i){
+			System.out.print("["+ super.get(i).toString() + "]");
+		}
+	}
+
 	/**
 	 * Adds an item, and returns the time taken to add that item.
 	 * @return
