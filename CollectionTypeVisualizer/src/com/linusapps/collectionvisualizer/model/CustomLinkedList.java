@@ -106,10 +106,17 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		if(foundIndex != -1){
 			System.out.println("\nItem found in index " + foundIndex);
 		}else{
-			System.out.println("\n ¯\\_(ツ)_/¯ Item not found");
+			System.out.println("\n ¯\\_(:/)_/¯ \nItem not found");
 		}
 		System.out.printf("It took %d ms to do this operation.", this.timeToCheckContains(item));
 		this.drawLines(80);
+	}
+	
+	public long timeToAddItem(E item, int index){
+		long startTime = System.nanoTime();
+		super.add(index, item);
+		long endTime = System.nanoTime();
+		return endTime-startTime;
 	}
 
 	@Override

@@ -44,9 +44,16 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	@Override
 	public long timeToAddItem(E item){
 		long startTime = System.nanoTime();
-		super.add(item);
+		boolean success = super.add(item);
 		long endTime = System.nanoTime();
-		return super.add(item) == true ? endTime-startTime : -1;
+		return success == true ? endTime-startTime : -1;
+	}
+	
+	public long timeToAddItem(E item, int index){
+		long startTime = System.nanoTime();
+		super.add(index, item);
+		long endTime = System.nanoTime();
+		return endTime-startTime;
 	}
 
 	/**
@@ -80,10 +87,8 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		for(int i = 0 ; i != amount; ++i){
 			s+="-";
 		}
-		System.out.println("\n" + s);
+		System.out.println(s);
 	}
-
-
 
 	@Override
 	public void drawContainingItem(E item) {
@@ -108,7 +113,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		if(foundIndex != -1){
 			System.out.println("\nItem found in index " + foundIndex);
 		}else{
-			System.out.println("\n ¯\\_(ツ)_/¯ Item not found");
+			System.out.println("\n ¯\\_(:/)_/¯ \nItem not found");
 		}
 		System.out.printf("It took %d ms to do this operation.", this.timeToCheckContains(item));
 		this.drawLines(80);
@@ -118,13 +123,34 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 
 	@Override
 	public void drawAddingItem(E item) {
-		// TODO Auto-generated method stub
-
+		this.drawLines(80);
+		
+		System.out.println("Adding value : " + item.toString());
+		System.out.println("\nstate before adding: ");
+		this.draw();
+		System.out.println("\n\nstate after adding: ");
+		this.timeToAddItem(item);
+		this.draw();
+		System.out.println("\nThe value was added to the end of the list.");
+		this.drawLines(80);
 	}
 
 	@Override
 	public void drawAddingItem(E item, int index) {
-		// TODO Auto-generated method stub
+		this.drawLines(80);
+		System.out.println("Adding value : " + item.toString());
+		System.out.println("\nstate before adding: ");
+		this.draw();
+		System.out.println("\n\nstate after adding: ");
+		boolean nullCheck = this.get(index) == null;
+		this.timeToAddItem(item, index);
+		this.draw();
+		System.out.printf("\nThe value was added at index %d\n", index);
+		if(!nullCheck)
+		System.out.println("It has been inserted between values " + this.get(index-1) + " and " + this.get(index+1));
+		else{}
+
+		this.drawLines(80);
 
 	}
 

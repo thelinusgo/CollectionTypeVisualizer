@@ -30,8 +30,9 @@ public class CollectionVisualizerController<E> {
 	 */
 	public static void initializeLists(int size){
 		for(int i = 0; i < size; ++i){
-			theArrayList.add(i);
-			theLinkedList.add(i);
+			int value = (int) (Math.random() * 10);
+			theArrayList.add(value);
+			theLinkedList.add(value);
 		}
 
 
@@ -46,9 +47,9 @@ public class CollectionVisualizerController<E> {
 		c.initializeLists(21);
 		//theArrayList.draw();
 		//theLinkedList.draw();
-		theArrayList.drawContainingItem(10);
-		theLinkedList.drawContainingItem(10);
-
+		//theArrayList.drawContainingItem(10);
+		//theLinkedList.drawContainingItem(10);
+		theArrayList.drawAddingItem(66,10);
 	}
 
 
