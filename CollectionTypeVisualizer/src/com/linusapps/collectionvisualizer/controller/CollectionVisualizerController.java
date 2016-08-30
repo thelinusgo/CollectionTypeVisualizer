@@ -2,6 +2,8 @@ package com.linusapps.collectionvisualizer.controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+
 import com.linusapps.collectionvisualizer.model.CustomArrayList;
 import com.linusapps.collectionvisualizer.model.CustomLinkedList;
 
@@ -13,7 +15,7 @@ import com.linusapps.collectionvisualizer.model.CustomLinkedList;
 public class CollectionVisualizerController<E> {
 	
 	/**
-	 * This holds 
+	 * This holds the data structures for the Collection types.
 	 */
 	private static CustomArrayList<Integer> theArrayList;
 	private static CustomLinkedList<Integer> theLinkedList;
@@ -30,10 +32,14 @@ public class CollectionVisualizerController<E> {
 	 */
 	public static void initializeLists(int size){
 		for(int i = 0; i < size; ++i){
+			Collections.shuffle(theArrayList);
 			theArrayList.add(i);
 			theLinkedList.add(i);
 		}
-		
+		Random random = new Random((long) 1.00);
+		Collections.shuffle(theArrayList, random);
+		Collections.shuffle(theLinkedList, random);
+
 
 	}
 	
