@@ -40,28 +40,28 @@ public interface CustomAbstractCollection<E>{
 	/**
 	 * Draws a depiction of a list, and the location of the item highlighted neatly.
 	 */
-	public abstract void drawContainingItem(E item);
+	public abstract void drawContainingItem(E item, Graphics g);
 
 	/**
 	 * Draws a depiction of a list before and after an item is added.
 	 */
-	public abstract void drawAddingItem(E item);
+	public abstract void drawAddingItem(E item, Graphics g);
 	/**
 	 * Draws a depiction of a list before and after an item is added, with a specified index.
 	 */
-	public abstract void drawAddingItem(E item, int index);
+	public abstract void drawAddingItem(E item, int index, Graphics g);
 	/**
 	 * Draws a depiction of a list before and after an item is removed.
 	 *
 	 */
-	public abstract void drawRemovingItem(E item);
+	public abstract void drawRemovingItem(E item, Graphics g);
 
 	/**
 	 * Draws a depiction of a list before and after an item is being added, with a specified index.
 	 * @param item
 	 * @param index
 	 */
-	public abstract void drawRemovingItem(int index);
+	public abstract void drawRemovingItem(int index, Graphics g);
 
 
 

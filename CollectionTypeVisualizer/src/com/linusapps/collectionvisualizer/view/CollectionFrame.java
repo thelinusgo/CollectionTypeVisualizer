@@ -42,10 +42,11 @@ public class CollectionFrame extends JFrame{
 	 */
 	public CollectionFrame(){
 		super("Collection Visualizer");
+		
 		controller = new CollectionVisualizerController<Integer>();
-		controller.initializeLists(24);
+		controller.initializeLists(1);
 
-		theCanvas = new CollectionCanvas();
+		theCanvas = new CollectionCanvas(this);
 		getContentPane().setLayout(new BorderLayout()); 
 		getContentPane().add(theCanvas, BorderLayout.CENTER);
 		theCanvas.setLayout(new BorderLayout(0, 0));
@@ -106,6 +107,9 @@ public class CollectionFrame extends JFrame{
 
 	}
 	
+	public CollectionVisualizerController controller(){
+		return this.controller;
+	}
 
 	
 	public static void main(String... args){

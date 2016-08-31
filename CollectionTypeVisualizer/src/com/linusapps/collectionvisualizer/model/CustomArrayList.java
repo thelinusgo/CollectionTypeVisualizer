@@ -19,8 +19,6 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	
 	/*Various constructors for the ArrayList...*/
 
-	
-	
 	public CustomArrayList() {
 		super();
 	}
@@ -40,12 +38,11 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		int size = super.size();
 		int x = 50;
 		int y = 50;
-		System.out.println("\nArrayList: " + "contains " + (super.size()-1) + (super.size() > 1 ? " values" : " value"));
-		for(int i = 1; i < size; ++i){
+		System.out.println("\nArrayList: " + "contains " + (super.size()) + (super.size() > 1 ? " values" : " value"));
+		for(int i = 0; i < size; ++i){
 			System.out.print("["+ super.get(i).toString() + "]");
-			//drawCell(x, y, g, super.get(i));
+			drawCell(x, y, g, super.get(i));
 			x+= CELL_WIDTH;
-			
 		}
 	}
 	
@@ -124,7 +121,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	}
 
 	@Override
-	public void drawContainingItem(E item) {
+	public void drawContainingItem(E item, Graphics g) {
 		this.drawLines(80);
 		System.out.println("Checking if list has value " + item.toString());
 		int foundIndex = -1;
@@ -136,7 +133,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 			System.out.print("["+ super.get(i).toString() + "]");
 		}
 
-		if(foundIndex != -1){
+		if(foundIndex != 0){
 			System.out.println("\nItem found in index " + foundIndex);
 		}else{
 			System.out.println("\n ¯\\_(:/)_/¯ \nItem not found");
@@ -148,9 +145,8 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	}
 
 	@Override
-	public void drawAddingItem(E item) {
+	public void drawAddingItem(E item, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Adding value : " + item.toString());
 		System.out.println("\nstate before adding: ");
 		this.draw(g);
@@ -163,9 +159,8 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	}
 
 	@Override
-	public void drawAddingItem(E item, int index) {
+	public void drawAddingItem(E item, int index, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Adding value : " + item.toString());
 		System.out.println("\nstate before adding: ");
 		this.draw(g);
@@ -182,9 +177,8 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	}
 
 	@Override
-	public void drawRemovingItem(E item) {
+	public void drawRemovingItem(E item, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Removing value : " + item.toString());
 		System.out.println("\nstate before removing: ");
 		this.draw(g);
@@ -200,10 +194,9 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		this.drawLines(80);
 	}
 	
-	
-	public void drawRemovingItem(int index) {
+	@Override
+	public void drawRemovingItem(int index, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Removing value at index : " + index);
 		System.out.println("\nstate before removing: ");
 		this.draw(g);
@@ -217,10 +210,6 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		}
 		this.drawLines(80);
 	}
-
-
-
-
 
 
 }

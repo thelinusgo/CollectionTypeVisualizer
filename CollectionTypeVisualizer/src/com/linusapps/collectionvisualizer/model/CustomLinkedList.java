@@ -96,7 +96,7 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	}
 
 	@Override
-	public void drawContainingItem(E item) {
+	public void drawContainingItem(E item, Graphics g) {
 		this.drawLines(80);
 		System.out.println("Checking if list has value " + item.toString());
 		boolean found = false;
@@ -128,8 +128,7 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	}
 
 	@Override
-	public void drawAddingItem(E item) {
-		Graphics g = null;
+	public void drawAddingItem(E item, Graphics g) {
 		this.drawLines(80);
 		System.out.println("Adding value : " + item.toString());
 		System.out.println("\nstate before adding: ");
@@ -142,9 +141,8 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	}
 
 	@Override
-	public void drawAddingItem(E item, int index) {
+	public void drawAddingItem(E item, int index, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Adding value : " + item.toString());
 		System.out.println("\nstate before adding: ");
 		this.draw(g);
@@ -160,9 +158,8 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	}
 
 	@Override
-	public void drawRemovingItem(E item) {
+	public void drawRemovingItem(E item, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Removing value : " + item.toString());
 		System.out.println("\nstate before removing: ");
 		this.draw(g);
@@ -179,9 +176,8 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	}
 	
 	@Override
-	public void drawRemovingItem(int index) {
+	public void drawRemovingItem(int index, Graphics g) {
 		this.drawLines(80);
-		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
 		System.out.println("Removing value at index : " + index);
 		System.out.println("\nstate before removing: ");
 		this.draw(g);
