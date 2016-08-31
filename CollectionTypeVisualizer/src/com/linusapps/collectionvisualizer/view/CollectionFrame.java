@@ -37,6 +37,11 @@ public class CollectionFrame extends JFrame{
 	private JMenuBar menuBar;
 	private JMenu mnFileMenu;
 	private JMenu mnHelpMenu;
+	private JButton btnClear;
+	private JButton btnAddValue;
+	private JButton btnRemoveValue;
+	private JButton btnEnterButton;
+	
 	/**
 	 * Create a new instance of a CollectionFrame
 	 */
@@ -44,7 +49,6 @@ public class CollectionFrame extends JFrame{
 		super("Collection Visualizer");
 		
 		controller = new CollectionVisualizerController<Integer>();
-		controller.initializeLists(1);
 
 		theCanvas = new CollectionCanvas(this);
 		getContentPane().setLayout(new BorderLayout()); 
@@ -60,6 +64,9 @@ public class CollectionFrame extends JFrame{
 			}
 		});
 		
+		btnClear = new JButton("Clear");
+		thePanel.add(btnClear);
+		
 		lblModeSelect = new JLabel("Mode Select:");
 		thePanel.add(lblModeSelect);
 		thePanel.add(btnArrayList);
@@ -74,11 +81,14 @@ public class CollectionFrame extends JFrame{
 		thePanel.add(textField);
 		textField.setColumns(10);
 		
-		JLabel lblAddValueindex = new JLabel("Add Value/Index:");
+		JLabel lblAddValueindex = new JLabel("Toggle Mode:");
 		thePanel.add(lblAddValueindex);
 		
-		btnValueIndexToggle = new JToggleButton("Add Value");
+		btnValueIndexToggle = new JToggleButton("Item Mode");
 		thePanel.add(btnValueIndexToggle);
+		
+		btnEnterButton = new JButton("Enter");
+		thePanel.add(btnEnterButton);
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack(); 
@@ -104,13 +114,57 @@ public class CollectionFrame extends JFrame{
 		JMenuItem mntmAboutCollectionvisualizer = new JMenuItem("About CollectionVisualizer");
 		mnHelpMenu.add(mntmAboutCollectionvisualizer);
 		this.setVisible(true);
-
+		this.enableActionListeners();
 	}
 	
 	public CollectionVisualizerController controller(){
 		return this.controller;
 	}
 
+	public void enableActionListeners(){
+		btnArrayList.addActionListener(e->{
+			controller.setControllerState("arraylist");
+			
+		});
+		
+		btnLinkedList.addActionListener(e->{
+			controller.setControllerState("linkedlist");
+		
+		});
+		
+		btnValueIndexToggle.addActionListener(e->{
+		
+		if(btnValueIndexToggle.isSelected()){
+			btnValueIndexToggle.setText("Index Mode");
+			controller.setisIndexMode(true);
+		}else{
+			btnValueIndexToggle.setText("Item Mode");
+			controller.setisIndexMode(false);
+		}
+		
+		
+		
+		});
+		
+		btnClear.addActionListener(e->{
+			controller.clearLists();
+			repaintAll();
+		});
+	
+		btnEnterButton.addActionListener(e->{
+			String val = textField.getText();
+			textField.setText("");
+			
+		});
+	}
+	
+	private void repaintAll(){
+		theCanvas.repaint();
+		thePanel.repaint();
+	}
+	
+	
+	
 	
 	public static void main(String... args){
 		new CollectionFrame();

@@ -1,5 +1,6 @@
 package com.linusapps.collectionvisualizer.controller;
 
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -25,8 +26,11 @@ public class CollectionVisualizerController<E> {
 	/**
 	 * The state of the controller. Can be "arraylist" or "linkedlist".
 	 */
-	private String controllerState;
-	
+	private String controllerState = "arraylist";
+	/**
+	 * Boolean for determining whether a value should be removed via its index, or via the item itself.
+	 */
+	private boolean isIndexMode = false;
 	
 	public CollectionVisualizerController(){
 		theArrayList = new CustomArrayList<Integer>();
@@ -34,6 +38,14 @@ public class CollectionVisualizerController<E> {
 		System.out.println(theArrayList);
 		System.out.println(theArrayList.size());
 
+	}
+	
+	public boolean isIndexMode(){
+		return this.isIndexMode;
+	}
+	
+	public void setisIndexMode(boolean value){
+		this.isIndexMode = value;
 	}
 	
 	/**
@@ -69,25 +81,48 @@ public class CollectionVisualizerController<E> {
 		return this.theLinkedList;
 	}
 
-	/**
-	 * Initialize the lists with a various size, with random elements.
-	 * @param size
-	 */
-	public  void initializeLists(int size){
-		for(int i = 0; i < size; ++i){
-			Collections.shuffle(theArrayList);
-			int value = (int) (Math.random() * 10);
-			theArrayList.add(value);
-			theLinkedList.add(value);
-		}
-	}
+//	/**
+//	 * Initialize the lists with a various size, with random elements.
+//	 * @param size
+//	 */
+//	public  void initializeLists(int size){
+//		for(int i = 0; i < size; ++i){
+//			Collections.shuffle(theArrayList);
+//			int value = (int) (Math.random() * 10);
+//			theArrayList.add(value);
+//			theLinkedList.add(value);
+//		}
+//	}
 	
 	
 	
 	public static void main(String[] args){
 		theFrame = new CollectionFrame();
-		
+	
 	}
+	/**
+	 * Clears the lists and redraws
+	 * @param g
+	 */
+	public void clearLists(){
+	theArrayList.clear();
+	theLinkedList.clear();
+	}
+
+//	/**
+//	 * Main method. To remove later!
+//	 * @param args
+//	 */
+//	public static void main(String... args){
+//		CollectionVisualizerController c = new CollectionVisualizerController();
+//		//c.initializeLists(21);
+//		//theArrayList.draw();
+//		//theLinkedList.drawContainingItem(10);
+//		theArrayList.drawAddingItem(1);
+//		theArrayList.drawAddingItem(2);
+//		theArrayList.drawAddingItem(3);
+//
+//	}
 	
 	
 //	/**

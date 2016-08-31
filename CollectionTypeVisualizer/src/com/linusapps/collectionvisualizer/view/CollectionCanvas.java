@@ -31,6 +31,11 @@ public class CollectionCanvas extends JPanel{
 	
 	
 	
+	
+	
+	
+	
+	
 	@Override
 	public Dimension getPreferredSize(){
 		return new Dimension(1201,620);
