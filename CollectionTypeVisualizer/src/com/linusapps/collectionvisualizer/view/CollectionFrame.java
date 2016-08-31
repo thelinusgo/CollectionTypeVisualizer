@@ -188,6 +188,13 @@ public class CollectionFrame extends JFrame{
 			if(isValidInput(val)){
 			textField.setText("");
 			controller.getArrayList().drawContainingItem(Integer.parseInt(val), theCanvas.getGraphics());
+			/*Add a slight delay for dramatic effect. */
+			try {
+				Thread.sleep(3000);
+				controller.getArrayList().draw(theCanvas.getGraphics());
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			}else{
 				JOptionPane.showMessageDialog(null, "value must be a number between 0 and 100");
 			}

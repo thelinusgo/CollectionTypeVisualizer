@@ -59,9 +59,11 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	/**
 	 * Draws an individual cell in an ArrayList highlighed the color orange.
 	 */
-	private void drawHighlightedCell(int xPos, int yPos, Graphics g){
+	private void drawHighlightedCell(int xPos, int yPos, Graphics g,  E val){
 		g.setColor(Color.ORANGE);
-		g.drawRect(xPos,yPos, CELL_WIDTH, CELL_HEIGHT);
+		g.fillRect(xPos,yPos, CELL_WIDTH, CELL_HEIGHT);
+		g.setColor(Color.BLACK);
+		g.drawString(val.toString(), xPos+(CELL_WIDTH/2), yPos+(CELL_HEIGHT/2));
 	}
 	
 	
@@ -144,7 +146,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		for(int i = 0; i < super.size(); ++i){
 			x+=CELL_WIDTH;
 			if(super.get(i).equals(item)){
-				this.drawHighlightedCell(x, y, g);
+				this.drawHighlightedCell(x, y, g, item);
 				System.out.print("[**"+ super.get(i).toString() + "**]");
 				foundIndex = i;
 				break;
