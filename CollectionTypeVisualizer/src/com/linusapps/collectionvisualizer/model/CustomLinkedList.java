@@ -1,5 +1,6 @@
 package com.linusapps.collectionvisualizer.model;
 
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -61,7 +62,7 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	 * Draws the list.
 	 */
 	@Override
-	public void draw(){
+	public void draw(Graphics g){
 		System.out.println("\nLinkedList: " + "contains " + (super.size()-1) + (super.size() > 1 ? " values" : " value"));
 		for(int i = 1; i < super.size(); ++i){
 			System.out.print(super.get(i).toString() + "->");
