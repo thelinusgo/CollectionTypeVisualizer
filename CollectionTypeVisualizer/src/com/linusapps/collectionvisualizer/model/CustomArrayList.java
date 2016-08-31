@@ -39,6 +39,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		int x = 50;
 		int y = 50;
 		System.out.println("\nArrayList: " + "contains " + (super.size()) + (super.size() > 1 ? " values" : " value"));
+		g.clearRect(0, 0, 1210, 567); //avoid clipping or weird artificating.
 		for(int i = 0; i < size; ++i){
 			System.out.print("["+ super.get(i).toString() + "]");
 			drawCell(x, y, g, super.get(i));
@@ -54,6 +55,16 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		g.setColor(Color.black);
 		g.drawString(val.toString(), xPos+(CELL_WIDTH/2), yPos+(CELL_HEIGHT/2));
 	}
+	
+	/**
+	 * Draws an individual cell in an ArrayList highlighed the color orange.
+	 */
+	private void drawHighlightedCell(int xPos, int yPos, Graphics g){
+		g.setColor(Color.ORANGE);
+		g.drawRect(xPos,yPos, CELL_WIDTH, CELL_HEIGHT);
+	}
+	
+	
 
 	/**
 	 * Adds an item, and returns the time taken to add that item.
@@ -119,21 +130,31 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		}
 		System.out.println(s);
 	}
-
+	
+	/**
+	 * This method draws an Orange rectangle around an item if it is inside the list.
+	 */
 	@Override
 	public void drawContainingItem(E item, Graphics g) {
 		this.drawLines(80);
 		System.out.println("Checking if list has value " + item.toString());
 		int foundIndex = -1;
-		for(int i = 1; i < super.size(); ++i){
+		int x = 0;
+		int y = 50;
+		for(int i = 0; i < super.size(); ++i){
+			x+=CELL_WIDTH;
 			if(super.get(i).equals(item)){
+				this.drawHighlightedCell(x, y, g);
 				System.out.print("[**"+ super.get(i).toString() + "**]");
-				foundIndex = i-1;
-			}else
+				foundIndex = i;
+				break;
+			}else{
 			System.out.print("["+ super.get(i).toString() + "]");
+			
+			}
 		}
 
-		if(foundIndex != 0){
+		if(foundIndex != -1){
 			System.out.println("\nItem found in index " + foundIndex);
 		}else{
 			System.out.println("\n ¯\\_(:/)_/¯ \nItem not found");
@@ -195,7 +216,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	}
 	
 	@Override
-	public void drawRemovingItem(int index, Graphics g) {
+	public void drawRemovingItemIndex(int index, Graphics g) {
 		this.drawLines(80);
 		System.out.println("Removing value at index : " + index);
 		System.out.println("\nstate before removing: ");

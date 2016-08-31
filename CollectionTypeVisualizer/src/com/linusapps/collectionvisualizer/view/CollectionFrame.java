@@ -15,6 +15,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JToggleButton;
 import javax.swing.JMenu;
@@ -38,12 +40,12 @@ public class CollectionFrame extends JFrame{
 	private JMenu mnFileMenu;
 	private JMenu mnHelpMenu;
 	private JButton btnClear;
-	private JButton btnAddValue;
-	private JButton btnRemoveValue;
-	private JButton btnEnterButton;
+	private JButton btnAddButton;
+	private JButton btnRemove;
+	private JButton btnContains;
 	
 	/**
-	 * Create a new instance of a CollectionFrame
+	 * Create a new instance of a CollectionFrame and initialize all of the components.
 	 */
 	public CollectionFrame(){
 		super("Collection Visualizer");
@@ -87,8 +89,14 @@ public class CollectionFrame extends JFrame{
 		btnValueIndexToggle = new JToggleButton("Item Mode");
 		thePanel.add(btnValueIndexToggle);
 		
-		btnEnterButton = new JButton("Enter");
-		thePanel.add(btnEnterButton);
+		btnAddButton = new JButton("Add");
+		thePanel.add(btnAddButton);
+		
+		btnRemove = new JButton("Remove");
+		thePanel.add(btnRemove);
+		
+		btnContains = new JButton("Contains");
+		thePanel.add(btnContains);
 				
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack(); 
@@ -117,11 +125,13 @@ public class CollectionFrame extends JFrame{
 		this.enableActionListeners();
 	}
 	
-	public CollectionVisualizerController controller(){
-		return this.controller;
-	}
 
-	public void enableActionListeners(){
+
+	@SuppressWarnings("unchecked")
+	/**
+	 * This enables the action listeners for all the interactive Swing components. This should be called in the constructor.
+	 */
+	private void enableActionListeners(){
 		btnArrayList.addActionListener(e->{
 			controller.setControllerState("arraylist");
 			
@@ -151,19 +161,70 @@ public class CollectionFrame extends JFrame{
 			repaintAll();
 		});
 	
-		btnEnterButton.addActionListener(e->{
+		btnAddButton.addActionListener(e->{
 			String val = textField.getText();
+			if(isValidInput(val)){
 			textField.setText("");
-			
+			controller.getArrayList().drawAddingItem(Integer.parseInt(val), theCanvas.getGraphics());
+			}else{
+				JOptionPane.showMessageDialog(null, "value must be a number between 0 and 100");
+			}
 		});
+		
+		btnRemove.addActionListener(e->{
+			String val = textField.getText();
+			if(isValidInput(val)){
+			textField.setText("");
+			controller.getArrayList().drawRemovingItem(Integer.parseInt(val), theCanvas.getGraphics());
+			}else{
+				JOptionPane.showMessageDialog(null, "value must be a number between 0 and 100");
+			}
+		
+		
+		});
+		
+		btnContains.addActionListener(e->{
+			String val = textField.getText();
+			if(isValidInput(val)){
+			textField.setText("");
+			controller.getArrayList().drawContainingItem(Integer.parseInt(val), theCanvas.getGraphics());
+			}else{
+				JOptionPane.showMessageDialog(null, "value must be a number between 0 and 100");
+			}
+		});
+		
+		
 	}
-	
+
+	/**
+	 * Repaints the canvas and the panel.
+	 */
 	private void repaintAll(){
 		theCanvas.repaint();
 		thePanel.repaint();
 	}
 	
+	/**
+	 * Checks the input inside a textField is valid.
+	 * @param val
+	 * @return
+	 */
+	private boolean isValidInput(String val){
+		int integer = Integer.parseInt(val);
+		if(val.equals(null) || (integer > 100 || integer < 0)){
+			return false;
+		}
+		return true;
+	}
 	
+	
+	/**
+	 * Return the controller object encapsulated in this CollectionFrame.
+	 * @return
+	 */
+	public CollectionVisualizerController controller(){
+		return this.controller;
+	}
 	
 	
 	public static void main(String... args){

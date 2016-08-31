@@ -176,7 +176,7 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	}
 	
 	@Override
-	public void drawRemovingItem(int index, Graphics g) {
+	public void drawRemovingItemIndex(int index, Graphics g) {
 		this.drawLines(80);
 		System.out.println("Removing value at index : " + index);
 		System.out.println("\nstate before removing: ");

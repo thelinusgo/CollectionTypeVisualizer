@@ -14,7 +14,8 @@ import com.linusapps.collectionvisualizer.model.CustomArrayList;
 public class CollectionCanvas extends JPanel{
 	
 	private CollectionFrame collectionFrame;
-	CustomArrayList<Integer> theList;
+	private CustomArrayList<Integer> theList;
+	private CustomArrayList<Integer> theLinkedList;
 	
 	public CollectionCanvas(CollectionFrame collectionFrame){
 		this.collectionFrame = collectionFrame;
@@ -25,25 +26,15 @@ public class CollectionCanvas extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		this.setBackground(Color.WHITE);
+		g.drawString("This is a very long test string", 50, 50);
 
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	@Override
 	public Dimension getPreferredSize(){
 		return new Dimension(1201,620);
 	}
 	
-	@Override
-	public void paint(Graphics g){
-	theList.draw(g);
-	}
+
 		
 }

@@ -93,12 +93,8 @@ public class CollectionVisualizerController<E> {
 //			theLinkedList.add(value);
 //		}
 //	}
-	
-	
-	
 	public static void main(String[] args){
 		theFrame = new CollectionFrame();
-	
 	}
 	/**
 	 * Clears the lists and redraws
@@ -108,37 +104,6 @@ public class CollectionVisualizerController<E> {
 	theArrayList.clear();
 	theLinkedList.clear();
 	}
-
-//	/**
-//	 * Main method. To remove later!
-//	 * @param args
-//	 */
-//	public static void main(String... args){
-//		CollectionVisualizerController c = new CollectionVisualizerController();
-//		//c.initializeLists(21);
-//		//theArrayList.draw();
-//		//theLinkedList.drawContainingItem(10);
-//		theArrayList.drawAddingItem(1);
-//		theArrayList.drawAddingItem(2);
-//		theArrayList.drawAddingItem(3);
-//
-//	}
-	
-	
-//	/**
-//	 * Main method. To remove later!
-//	 * @param args
-//	 */
-//	public static void main(String... args){
-//		CollectionVisualizerController c = new CollectionVisualizerController();
-//		//c.initializeLists(21);
-//		//theArrayList.draw();
-//		//theLinkedList.drawContainingItem(10);
-//		theArrayList.drawAddingItem(1);
-//		theArrayList.drawAddingItem(2);
-//		//theArrayList.drawAddingItem(3);
-//
-//	}
 
 
 }

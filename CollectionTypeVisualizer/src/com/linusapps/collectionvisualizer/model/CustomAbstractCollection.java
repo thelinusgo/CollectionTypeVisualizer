@@ -60,8 +60,8 @@ public interface CustomAbstractCollection<E>{
 	 * Draws a depiction of a list before and after an item is being added, with a specified index.
 	 * @param item
 	 * @param index
-	 */
-	public abstract void drawRemovingItem(int index, Graphics g);
+	 */	
+	public abstract void drawRemovingItemIndex(int index, Graphics g);
 
 
 
