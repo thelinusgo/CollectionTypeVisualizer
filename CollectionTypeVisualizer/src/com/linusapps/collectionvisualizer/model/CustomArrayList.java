@@ -43,7 +43,7 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		System.out.println("\nArrayList: " + "contains " + (super.size()-1) + (super.size() > 1 ? " values" : " value"));
 		for(int i = 1; i < size; ++i){
 			System.out.print("["+ super.get(i).toString() + "]");
-			//drawCell(x, y, g, super.get(i));
+			drawCell(x, y, g, super.get(i));
 			x+= CELL_WIDTH;
 			
 		}

@@ -1,5 +1,6 @@
 package com.linusapps.collectionvisualizer.controller;
 
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -23,13 +24,24 @@ public class CollectionVisualizerController<E> {
 	/**
 	 * The state of the controller. Can be "arraylist" or "linkedlist".
 	 */
-	private String controllerState;
-	
+	private String controllerState = "arraylist";
+	/**
+	 * Boolean for determining whether a value should be removed via its index, or via the item itself.
+	 */
+	private boolean isIndexMode = false;
 	
 	public CollectionVisualizerController(){
 		theArrayList = new CustomArrayList<Integer>();
 		theLinkedList = new CustomLinkedList<Integer>();
 
+	}
+	
+	public boolean isIndexMode(){
+		return this.isIndexMode;
+	}
+	
+	public void setisIndexMode(boolean value){
+		this.isIndexMode = value;
 	}
 	
 	public String getControllerState(){
@@ -59,6 +71,15 @@ public class CollectionVisualizerController<E> {
 			theArrayList.add(value);
 			theLinkedList.add(value);
 		}
+	}
+	
+	/**
+	 * Clears the lists and redraws
+	 * @param g
+	 */
+	public void clearLists(){
+	theArrayList.clear();
+	theLinkedList.clear();
 	}
 
 	/**
