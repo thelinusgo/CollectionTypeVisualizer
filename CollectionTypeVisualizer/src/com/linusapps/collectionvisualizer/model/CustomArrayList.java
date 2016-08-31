@@ -60,15 +60,15 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 
 	/**
 	 * Adds an item, and returns the time taken to add that item.
-	 * @param item.
+	 * @param item to  be added.
 	 * @return elapsed time
 	 */
 	@Override
 	public long timeToAddItem(E item){
 		long startTime = System.nanoTime();
-		boolean success = super.add(item);
+		boolean isSuccessful = super.add(item);
 		long endTime = System.nanoTime();
-		return success == true ? endTime-startTime : -1;
+		return isSuccessful == true ? endTime-startTime : -1;
 	}
 	
 	public long timeToAddItem(E item, int index){
@@ -83,11 +83,22 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	 */
 	public long timeToRemoveItem(E item){
 		long startTime = System.nanoTime();
-		super.remove(item);
+		boolean isSuccessful = super.remove(item);
 		long endTime = System.nanoTime();
-		return super.remove(item) == true ? endTime-startTime : -1;
+		return isSuccessful == true ? endTime-startTime : -1;
 	}
-
+	
+	/**
+	 * Removes an item and returns the time taken to remove that item.
+	 */
+	public long timeToRemoveItemIndex(int index){
+		long startTime = System.nanoTime();
+		super.remove(index);
+		long endTime = System.nanoTime();
+		return  endTime-startTime;
+	}
+	
+	
 	/**
 	 * Returns how long it checks to find an item.
 	 * @param item
@@ -95,9 +106,9 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 	 */
 	public long timeToCheckContains(E item){
 		long startTime = System.nanoTime();
-		super.contains(item);
+		boolean isSuccessful = super.contains(item);
 		long endTime = System.nanoTime();
-		return super.contains(item) == true ? endTime-startTime : -1;
+		return isSuccessful == true ? endTime-startTime : -1;
 	}
 
 	/**
@@ -168,20 +179,47 @@ public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCo
 		else{}
 		System.out.printf("\nIt took %d ms to perform this operation\n", time);
 		this.drawLines(80);
-
 	}
 
 	@Override
 	public void drawRemovingItem(E item) {
-		// TODO Auto-generated method stub
-
+		this.drawLines(80);
+		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
+		System.out.println("Removing value : " + item.toString());
+		System.out.println("\nstate before removing: ");
+		this.draw(g);
+		System.out.println("\n\nstate after removing: ");
+		long time = this.timeToRemoveItem(item);
+		this.draw(g);
+		if(time != -1){
+		System.out.println("\nThe value has been removed.");
+		}else{
+		System.out.println("\n The element cannot be found.");
+		}
+		
+		this.drawLines(80);
+	}
+	
+	
+	public void drawRemovingItem(int index) {
+		this.drawLines(80);
+		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
+		System.out.println("Removing value at index : " + index);
+		System.out.println("\nstate before removing: ");
+		this.draw(g);
+		System.out.println("\n\nstate after removing: ");
+		long time = this.timeToRemoveItemIndex(index);
+		this.draw(g);
+		if(time != -1){
+		System.out.println("\nThe value has been removed.");
+		}else{
+		System.out.println("\n The element cannot be found.");
+		}
+		this.drawLines(80);
 	}
 
-	@Override
-	public void drawRemovingItem(E item, int index) {
-		// TODO Auto-generated method stub
 
-	}
+
 
 
 

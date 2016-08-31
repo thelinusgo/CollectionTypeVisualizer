@@ -29,9 +29,9 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	@Override
 	public long timeToAddItem(E item){
 		long startTime = System.nanoTime();
-		super.add(item);
+		boolean isSuccessful = super.add(item);
 		long endTime = System.nanoTime();
-		return super.add(item) == true ? endTime-startTime : -1;
+		return isSuccessful == true ? endTime-startTime : -1;
 	}
 
 	/**
@@ -40,10 +40,23 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	@Override
 	public long timeToRemoveItem(E item){
 		long startTime = System.nanoTime();
-		super.remove(item);
+		boolean isSuccessful = super.remove(item);
 		long endTime = System.nanoTime();
-		return super.remove(item) == true ? endTime-startTime : -1;
+		return isSuccessful == true ? endTime-startTime : -1;
 	}
+	
+	/**
+	 * Removes an item and returns the time taken to remove that item at the specified index.
+	 */
+	
+	public long timeToRemoveItemIndex(int index){
+		long startTime = System.nanoTime();
+		super.remove(index);
+		long endTime = System.nanoTime();
+		return endTime-startTime ;
+	}
+	
+
 
 	/**
 	 * Returns how long it checks to find an item.
@@ -53,9 +66,9 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 	@Override
 	public long timeToCheckContains(E item){
 		long startTime = System.nanoTime();
-		super.contains(item);
+		boolean isSuccessful = super.contains(item);
 		long endTime = System.nanoTime();
-		return super.contains(item) == true ? endTime-startTime : -1;
+		return isSuccessful == true ? endTime-startTime : -1;
 	}
 
 	/**
@@ -66,7 +79,6 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		System.out.println("\nLinkedList: " + "contains " + (super.size()-1) + (super.size() > 1 ? " values" : " value"));
 		for(int i = 1; i < super.size(); ++i){
 			System.out.print(super.get(i).toString() + "->");
-
 		}
 		System.out.print("/NULL");
 	}
@@ -99,11 +111,6 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		}
 		System.out.print("/NULL");
 
-//		if(!found){
-//			System.out.println("\nItem not in this list.");
-//		}
-
-
 		if(foundIndex != -1){
 			System.out.println("\nItem found in index " + foundIndex);
 		}else{
@@ -122,29 +129,71 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 
 	@Override
 	public void drawAddingItem(E item) {
-		// TODO Auto-generated method stub
-
+		Graphics g = null;
+		this.drawLines(80);
+		System.out.println("Adding value : " + item.toString());
+		System.out.println("\nstate before adding: ");
+		this.draw(g);
+		System.out.println("\n\nstate after adding: ");
+		this.timeToAddItem(item);
+		this.draw(g);
+		System.out.println("\nThe value was added to the end of the list.");
+		this.drawLines(80);
 	}
 
 	@Override
 	public void drawAddingItem(E item, int index) {
-		// TODO Auto-generated method stub
-
+		this.drawLines(80);
+		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
+		System.out.println("Adding value : " + item.toString());
+		System.out.println("\nstate before adding: ");
+		this.draw(g);
+		System.out.println("\n\nstate after adding: ");
+		boolean nullCheck = this.get(index) == null;
+		this.timeToAddItem(item, index);
+		this.draw(g);
+		System.out.printf("\nThe value was added at index %d\n", index);
+		if(!nullCheck)
+		System.out.println("It has been inserted between values " + this.get(index-1) + " and " + this.get(index+1));
+		else{}
+		this.drawLines(80);
 	}
 
 	@Override
 	public void drawRemovingItem(E item) {
-		// TODO Auto-generated method stub
-
+		this.drawLines(80);
+		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
+		System.out.println("Removing value : " + item.toString());
+		System.out.println("\nstate before removing: ");
+		this.draw(g);
+		System.out.println("\n\nstate after removing: ");
+		long time = this.timeToRemoveItem(item);
+		this.draw(g);
+		if(time != -1){
+		System.out.println("\nThe value has been removed.");
+		}else{
+		System.out.println("\n The element cannot be found.");
+		}
+		
+		this.drawLines(80);
 	}
-
+	
 	@Override
-	public void drawRemovingItem(E item, int index) {
-		// TODO Auto-generated method stub
-
+	public void drawRemovingItem(int index) {
+		this.drawLines(80);
+		Graphics g = null; //TODO: MUST FIX this and remove it later. Placeholder value.
+		System.out.println("Removing value at index : " + index);
+		System.out.println("\nstate before removing: ");
+		this.draw(g);
+		System.out.println("\n\nstate after removing: ");
+		long time = this.timeToRemoveItemIndex(index);
+		this.draw(g);
+		if(time != -1){
+		System.out.println("\nThe value has been removed.");
+		}else{
+		System.out.println("\n The element cannot be found.");
+		}
+		this.drawLines(80);
 	}
-
-
-
 
 }

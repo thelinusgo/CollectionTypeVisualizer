@@ -61,7 +61,7 @@ public interface CustomAbstractCollection<E>{
 	 * @param item
 	 * @param index
 	 */
-	public abstract void drawRemovingItem(E item, int index);
+	public abstract void drawRemovingItem(int index);
 
 
 

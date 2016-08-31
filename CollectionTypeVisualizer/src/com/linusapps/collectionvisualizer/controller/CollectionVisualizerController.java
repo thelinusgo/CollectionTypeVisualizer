@@ -2,6 +2,8 @@ package com.linusapps.collectionvisualizer.controller;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+
 import com.linusapps.collectionvisualizer.model.CustomArrayList;
 import com.linusapps.collectionvisualizer.model.CustomLinkedList;
 
@@ -13,9 +15,10 @@ import com.linusapps.collectionvisualizer.model.CustomLinkedList;
 public class CollectionVisualizerController<E> {
 
 	/**
-	 * This holds the Data structures that will be used for Demonstration.
+	 * This holds the data structures for the Collection types.
+	 * .
 	 */
-	private static  CustomArrayList<Integer> theArrayList;
+	private static CustomArrayList<Integer> theArrayList;
 	private  CustomLinkedList<Integer> theLinkedList;
 	/**
 	 * The state of the controller. Can be "arraylist" or "linkedlist".
@@ -46,21 +49,22 @@ public class CollectionVisualizerController<E> {
 	}
 
 	/**
-	 * Initialize the lists with a various size.
+	 * Initialize the lists with a various size, with random elements.
 	 * @param size
 	 */
 	public  void initializeLists(int size){
 		for(int i = 0; i < size; ++i){
+			Collections.shuffle(theArrayList);
 			int value = (int) (Math.random() * 10);
 			theArrayList.add(value);
 			theLinkedList.add(value);
 		}
 	}
 
-//	/**
-//	 * Main method. To remove later!
-//	 * @param args
-//	 */
+	/**
+	 * Main method. To remove later!
+	 * @param args
+	 */
 	public static void main(String... args){
 		CollectionVisualizerController c = new CollectionVisualizerController();
 		//c.initializeLists(21);
