@@ -22,54 +22,7 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		super(c);
 	}
 
-	/**
-	 * Adds an item, and returns the time taken to add that item.
-	 * @return
-	 */
-	@Override
-	public long timeToAddItem(E item){
-		long startTime = System.nanoTime();
-		boolean isSuccessful = super.add(item);
-		long endTime = System.nanoTime();
-		return isSuccessful == true ? endTime-startTime : -1;
-	}
 
-	/**
-	 * Removes an item and returns the time taken to remove that item.
-	 */
-	@Override
-	public long timeToRemoveItem(E item){
-		long startTime = System.nanoTime();
-		boolean isSuccessful = super.remove(item);
-		long endTime = System.nanoTime();
-		return isSuccessful == true ? endTime-startTime : -1;
-	}
-	
-	/**
-	 * Removes an item and returns the time taken to remove that item at the specified index.
-	 */
-	
-	public long timeToRemoveItemIndex(int index){
-		long startTime = System.nanoTime();
-		super.remove(index);
-		long endTime = System.nanoTime();
-		return endTime-startTime ;
-	}
-	
-
-
-	/**
-	 * Returns how long it checks to find an item.
-	 * @param item
-	 * @return
-	 */
-	@Override
-	public long timeToCheckContains(E item){
-		long startTime = System.nanoTime();
-		boolean isSuccessful = super.contains(item);
-		long endTime = System.nanoTime();
-		return isSuccessful == true ? endTime-startTime : -1;
-	}
 
 	/**
 	 * Draws the list.
@@ -116,7 +69,6 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		}else{
 			System.out.println("\n ¯\\_(:/)_/¯ \nItem not found");
 		}
-		System.out.printf("It took %d ms to do this operation.", this.timeToCheckContains(item));
 		this.drawLines(80);
 	}
 	
@@ -134,7 +86,6 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		System.out.println("\nstate before adding: ");
 		this.draw(g);
 		System.out.println("\n\nstate after adding: ");
-		this.timeToAddItem(item);
 		this.draw(g);
 		System.out.println("\nThe value was added to the end of the list.");
 		this.drawLines(80);
@@ -164,13 +115,8 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		System.out.println("\nstate before removing: ");
 		this.draw(g);
 		System.out.println("\n\nstate after removing: ");
-		long time = this.timeToRemoveItem(item);
 		this.draw(g);
-		if(time != -1){
-		System.out.println("\nThe value has been removed.");
-		}else{
-		System.out.println("\n The element cannot be found.");
-		}
+	
 		
 		this.drawLines(80);
 	}
@@ -182,13 +128,7 @@ public class CustomLinkedList<E> extends LinkedList<E> implements CustomAbstract
 		System.out.println("\nstate before removing: ");
 		this.draw(g);
 		System.out.println("\n\nstate after removing: ");
-		long time = this.timeToRemoveItemIndex(index);
 		this.draw(g);
-		if(time != -1){
-		System.out.println("\nThe value has been removed.");
-		}else{
-		System.out.println("\n The element cannot be found.");
-		}
 		this.drawLines(80);
 	}
 

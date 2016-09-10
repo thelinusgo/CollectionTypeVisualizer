@@ -9,29 +9,6 @@ import java.awt.Graphics;
  * @param <E>
  */
 public interface CustomAbstractCollection<E>{
-
-	/**
-	 * Returns the time taken to add an item. Returns -1 if not successful.
-	 * @param item
-	 * @return
-	 */
-	public abstract long timeToAddItem(E item);
-	/**
-	 * Returns the time taken to remove an item. Returns -1 if not successful.
-	 * @param item
-	 * @return
-	 */
-	public abstract long timeToRemoveItem(E item);
-
-	/**
-	 * Returns the time taken to check if a value is contained in this list. Returns
-	 * -1 if not successful.
-	 * @param item
-	 * @return
-	 */
-	public abstract long timeToCheckContains(E item);
-
-
 	/**
 	 * Draws the list in textual form.
 	 */

@@ -1,238 +1,189 @@
 package com.linusapps.collectionvisualizer.model;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collection;
+
 /**
- * An Extension of a  ArrayList, but has methods that return the elapsed time for certain operations.
- * The method returns the elapsed time taken to perform the operation, but if it was not successful, it returns -1.
+ * An Extension of java.util.ArrayList, but it provides methods for drawing onto
+ * the Canvas. All methods that were previously in ArrayList are still
+ * accessible and usable.
+ * 
  * @author linus
  *
  * @param <E>
  */
-public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCollection<E>{
+public class CustomArrayList<E> extends ArrayList<E> implements CustomAbstractCollection<E> {
 
-	/*Constant fields */
-	private static final int CELL_WIDTH = 50;
-	private static final int CELL_HEIGHT = 50;
-	
-	/*Various constructors for the ArrayList...*/
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4388481113398341759L;
 
+	/* Constant fields */
+	private final int CELL_WIDTH = 50; // nominal width of a cell.
+	private final int CELL_HEIGHT = 50; // nominal height of a cell.
+	private final int SLEEP_TIME = 1000; // time between each delay (in ms)
+
+	/* Various constructors for the ArrayList... */
+
+	/**
+	 * Create an ArrayList.
+	 */
 	public CustomArrayList() {
 		super();
 	}
 
-	public CustomArrayList(int initialCapacity){
+	/**
+	 * Create an ArrayList with an Initial Capacity.
+	 * 
+	 * @param initialCapacity
+	 */
+	public CustomArrayList(int initialCapacity) {
 		super(initialCapacity);
 	}
 
-	public CustomArrayList(Collection <? extends E> c){
+	/**
+	 * Create an ArrayList initialized with a collection type.
+	 * 
+	 * @param c
+	 */
+	public CustomArrayList(Collection<? extends E> c) {
 		super(c);
 	}
 
 	/**
-	 * Permits drawing the list in a textual form.
+	 * Permits drawing the entire list out graphically.
 	 */
-	public void draw(Graphics g){
+	public void draw(Graphics g) {
 		int size = super.size();
+		// offsets
 		int x = 50;
 		int y = 50;
-		System.out.println("\nArrayList: " + "contains " + (super.size()) + (super.size() > 1 ? " values" : " value"));
-		g.clearRect(0, 0, 1210, 567); //avoid clipping or weird artificating.
-		for(int i = 0; i < size; ++i){
-			System.out.print("["+ super.get(i).toString() + "]");
+		int index = 0;
+		g.setColor(Color.GRAY);
+		g.fillRect(0, 0, 1210, 567); // avoid clipping or weird artificating.
+
+		for (int i = 0; i < size; ++i) {
 			drawCell(x, y, g, super.get(i));
-			x+= CELL_WIDTH;
+			g.drawString(String.valueOf(index), x + (CELL_WIDTH / 2), y);
+			x += CELL_WIDTH;
+			index++;
 		}
 	}
-	
+
 	/**
 	 * Draws an individual cell in an ArrayList.
 	 */
-	private void drawCell(int xPos, int yPos, Graphics g, E val){
-		g.drawRect(xPos,yPos, CELL_WIDTH, CELL_HEIGHT);
-		g.setColor(Color.black);
-		g.drawString(val.toString(), xPos+(CELL_WIDTH/2), yPos+(CELL_HEIGHT/2));
+	private void drawCell(int xPos, int yPos, Graphics g, E val) {
+		g.setColor(Color.YELLOW);
+		g.fillRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
+		g.setColor(Color.BLACK);
+		g.drawRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
+		g.drawString(val.toString(), xPos + (CELL_WIDTH / 2), yPos + (CELL_HEIGHT / 2));
 	}
-	
+
 	/**
 	 * Draws an individual cell in an ArrayList highlighed the color orange.
 	 */
-	private void drawHighlightedCell(int xPos, int yPos, Graphics g,  E val){
-		g.setColor(Color.ORANGE);
-		g.fillRect(xPos,yPos, CELL_WIDTH, CELL_HEIGHT);
-		g.setColor(Color.BLACK);
-		g.drawString(val.toString(), xPos+(CELL_WIDTH/2), yPos+(CELL_HEIGHT/2));
-	}
-	
-	
+	private void drawHighlightedCell(int xPos, int yPos, Graphics g, E val) {
+		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(5));
+		
+		System.out.println("xpos: " + xPos + " ypos: " + yPos);
+		
+		g2.drawRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
 
-	/**
-	 * Adds an item, and returns the time taken to add that item.
-	 * @param item to  be added.
-	 * @return elapsed time
-	 */
-	@Override
-	public long timeToAddItem(E item){
-		long startTime = System.nanoTime();
-		boolean isSuccessful = super.add(item);
-		long endTime = System.nanoTime();
-		return isSuccessful == true ? endTime-startTime : -1;
-	}
-	
-	public long timeToAddItem(E item, int index){
-		long startTime = System.nanoTime();
-		super.add(index, item);
-		long endTime = System.nanoTime();
-		return endTime-startTime;
-	}
+		g2.setColor(Color.YELLOW);
+		g2.fillRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
+		g2.setColor(Color.BLACK);
+		g2.drawRect(xPos, yPos, CELL_WIDTH, CELL_HEIGHT);
+		g2.drawString(val.toString(), xPos + (CELL_WIDTH / 2), yPos + (CELL_HEIGHT / 2));
 
-	/**
-	 * Removes an item and returns the time taken to remove that item.
-	 */
-	public long timeToRemoveItem(E item){
-		long startTime = System.nanoTime();
-		boolean isSuccessful = super.remove(item);
-		long endTime = System.nanoTime();
-		return isSuccessful == true ? endTime-startTime : -1;
-	}
-	
-	/**
-	 * Removes an item and returns the time taken to remove that item.
-	 */
-	public long timeToRemoveItemIndex(int index){
-		long startTime = System.nanoTime();
-		super.remove(index);
-		long endTime = System.nanoTime();
-		return  endTime-startTime;
-	}
-	
-	
-	/**
-	 * Returns how long it checks to find an item.
-	 * @param item
-	 * @return
-	 */
-	public long timeToCheckContains(E item){
-		long startTime = System.nanoTime();
-		boolean isSuccessful = super.contains(item);
-		long endTime = System.nanoTime();
-		return isSuccessful == true ? endTime-startTime : -1;
-	}
-
-	/**
-	 * Draws lines up to the amount specified in the argument.
-	 * @param amount
-	 */
-	public void drawLines(int amount){
-		String s = "";
-		for(int i = 0 ; i != amount; ++i){
-			s+="-";
+		/* Add a slight delay for dramatic effect. */
+		try {
+			Thread.sleep(SLEEP_TIME);
+			g2.setStroke(new BasicStroke(1));
+			this.draw(g2);
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
-		System.out.println(s);
+
 	}
-	
+
 	/**
-	 * This method draws an Orange rectangle around an item if it is inside the list.
+	 * This method draws an Orange rectangle around an item if it is inside the
+	 * list.
 	 */
 	@Override
 	public void drawContainingItem(E item, Graphics g) {
-		this.drawLines(80);
-		System.out.println("Checking if list has value " + item.toString());
 		int foundIndex = -1;
 		int x = 0;
 		int y = 50;
-		for(int i = 0; i < super.size(); ++i){
-			x+=CELL_WIDTH;
-			if(super.get(i).equals(item)){
+		for (int i = 0; i < super.size(); ++i) {
+			x += CELL_WIDTH;
+			if (super.get(i).equals(item)) {
 				this.drawHighlightedCell(x, y, g, item);
-				System.out.print("[**"+ super.get(i).toString() + "**]");
 				foundIndex = i;
 				break;
-			}else{
-			System.out.print("["+ super.get(i).toString() + "]");
-			
 			}
 		}
 
-		if(foundIndex != -1){
+		if (foundIndex != -1) {
 			System.out.println("\nItem found in index " + foundIndex);
-		}else{
+		} else {
 			System.out.println("\n ¯\\_(:/)_/¯ \nItem not found");
 		}
-		System.out.printf("It took %d ms to do this operation.", this.timeToCheckContains(item));
-		this.drawLines(80);
-
 
 	}
 
 	@Override
 	public void drawAddingItem(E item, Graphics g) {
-		this.drawLines(80);
-		System.out.println("Adding value : " + item.toString());
-		System.out.println("\nstate before adding: ");
+		super.add(item);
 		this.draw(g);
-		System.out.println("\n\nstate after adding: ");
-		long time = this.timeToAddItem(item);
-		this.draw(g);
-		System.out.println("\nThe value was added to the end of the list.");
-		System.out.printf("\nIt took %d ms to perform this operation\n", time);
-		this.drawLines(80);
 	}
 
 	@Override
 	public void drawAddingItem(E item, int index, Graphics g) {
-		this.drawLines(80);
-		System.out.println("Adding value : " + item.toString());
-		System.out.println("\nstate before adding: ");
-		this.draw(g);
-		System.out.println("\n\nstate after adding: ");
+		super.remove(index);
 		boolean nullCheck = this.get(index) == null;
-		long time = this.timeToAddItem(item, index);
 		this.draw(g);
-		System.out.printf("\nThe value was added at index %d\n", index);
-		if(!nullCheck)
-		System.out.println("It has been inserted between values " + this.get(index-1) + " and " + this.get(index+1));
-		else{}
-		System.out.printf("\nIt took %d ms to perform this operation\n", time);
-		this.drawLines(80);
 	}
 
 	@Override
 	public void drawRemovingItem(E item, Graphics g) {
-		this.drawLines(80);
-		System.out.println("Removing value : " + item.toString());
-		System.out.println("\nstate before removing: ");
-		this.draw(g);
-		System.out.println("\n\nstate after removing: ");
-		long time = this.timeToRemoveItem(item);
-		this.draw(g);
-		if(time != -1){
-		System.out.println("\nThe value has been removed.");
-		}else{
-		System.out.println("\n The element cannot be found.");
+		for (int i = 1; i < size(); ++i) {
+			this.drawHighlightedCell((CELL_WIDTH * i), CELL_HEIGHT, g, this.get(i - 1));
+
+			if (this.get(i).equals(item)) {
+				
+        		/* Blink cause it equals the item. */
+				for (int j = 0; j < 3; j++) {
+					try {
+						Thread.sleep(SLEEP_TIME / 4);
+						System.out.println(i);
+						this.drawHighlightedCell((CELL_WIDTH * i), CELL_HEIGHT, g, this.get(i-1));
+						this.drawCell(((CELL_WIDTH * i)), CELL_HEIGHT, g, this.get(i-1));
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+				
+			}
+
 		}
-		
-		this.drawLines(80);
-	}
-	
-	@Override
-	public void drawRemovingItemIndex(int index, Graphics g) {
-		this.drawLines(80);
-		System.out.println("Removing value at index : " + index);
-		System.out.println("\nstate before removing: ");
+		super.remove(item);
 		this.draw(g);
-		System.out.println("\n\nstate after removing: ");
-		long time = this.timeToRemoveItemIndex(index);
-		this.draw(g);
-		if(time != -1){
-		System.out.println("\nThe value has been removed.");
-		}else{
-		System.out.println("\n The element cannot be found.");
-		}
-		this.drawLines(80);
 	}
 
+	@Override
+	public void drawRemovingItemIndex(int index, Graphics g) {
+		this.draw(g);
+		this.remove(index);
+		this.draw(g);
+	}
 
 }

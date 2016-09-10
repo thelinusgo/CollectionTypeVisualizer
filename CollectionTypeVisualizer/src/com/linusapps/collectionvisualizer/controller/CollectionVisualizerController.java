@@ -81,18 +81,6 @@ public class CollectionVisualizerController<E> {
 		return this.theLinkedList;
 	}
 
-//	/**
-//	 * Initialize the lists with a various size, with random elements.
-//	 * @param size
-//	 */
-//	public  void initializeLists(int size){
-//		for(int i = 0; i < size; ++i){
-//			Collections.shuffle(theArrayList);
-//			int value = (int) (Math.random() * 10);
-//			theArrayList.add(value);
-//			theLinkedList.add(value);
-//		}
-//	}
 	public static void main(String[] args){
 		theFrame = new CollectionFrame();
 	}

@@ -16,8 +16,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JToggleButton;
 import javax.swing.JMenu;
 import javax.swing.JTextPane;
@@ -151,9 +149,6 @@ public class CollectionFrame extends JFrame{
 			btnValueIndexToggle.setText("Item Mode");
 			controller.setisIndexMode(false);
 		}
-		
-		
-		
 		});
 		
 		btnClear.addActionListener(e->{
@@ -179,8 +174,6 @@ public class CollectionFrame extends JFrame{
 			}else{
 				JOptionPane.showMessageDialog(null, "value must be a number between 0 and 100");
 			}
-		
-		
 		});
 		
 		btnContains.addActionListener(e->{
@@ -188,13 +181,7 @@ public class CollectionFrame extends JFrame{
 			if(isValidInput(val)){
 			textField.setText("");
 			controller.getArrayList().drawContainingItem(Integer.parseInt(val), theCanvas.getGraphics());
-			/*Add a slight delay for dramatic effect. */
-			try {
-				Thread.sleep(3000);
-				controller.getArrayList().draw(theCanvas.getGraphics());
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
+			
 			}else{
 				JOptionPane.showMessageDialog(null, "value must be a number between 0 and 100");
 			}
